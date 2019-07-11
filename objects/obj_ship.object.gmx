@@ -118,10 +118,11 @@ move_wrap(true, true, sprite_height/2);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_destroy();
-repeat(10){
+            <string>repeat(10){
     instance_create(x, y, obj_debris);
 }
+instance_destroy();
+lives-=1;
 </string>
           </argument>
         </arguments>

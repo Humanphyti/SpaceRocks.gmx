@@ -17,17 +17,24 @@
     <background>background\bg_clouds</background>
   </backgrounds>
   <paths name="paths"/>
+  <fonts name="fonts">
+    <font>fonts\fnt_text</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_ship</object>
     <object>objects\obj_asteroid</object>
     <object>objects\obj_missile</object>
     <object>objects\obj_debris</object>
+    <object>objects\obj_GameMode</object>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\timeline0</timeline>
   </timelines>
   <rooms name="rooms">
+    <room>rooms\rm_start</room>
     <room>rooms\rm_skyroom</room>
+    <room>rooms\rm_gameover</room>
+    <room>rooms\rm_win</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
