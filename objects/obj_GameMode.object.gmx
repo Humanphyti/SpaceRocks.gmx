@@ -25,9 +25,47 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>score = 990;
-lives = 1;
+            <string>score = 0;
+lives = 3;
 draw_set_font(fnt_text);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (room != rm_skyroom){
+    exit;
+}
+if(choose(0,1) == 0){
+    //go down the side
+    var xx = choose(0, room_width);
+    var yy = irandom_range(0, room_height);
+} else {
+    //go top or bottom
+    var xx = irandom_range(0,room_width);
+    var yy = choose(0, room_height);
+}
+
+instance_create(xx, yy, obj_asteroid);
+
+alarm[1] = 2*room_speed;
 </string>
           </argument>
         </arguments>
@@ -76,6 +114,37 @@ if (room == rm_skyroom){
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (room == rm_skyroom){
+    repeat(6){
+        var xx = choose(irandom_range(0, room_width*0.3), irandom_range(room_width*0.7, room_width));
+        var yy = choose(irandom_range(0, room_height*0.3), irandom_range(room_height*0.7, room_height));
+        instance_create(xx, yy, obj_asteroid);
+    }
+    instance_create(room_width/2, room_height/2, obj_ship);
+    alarm[1] = 60;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
@@ -98,13 +167,13 @@ if (room == rm_skyroom){
         
         var c = c_lime
         draw_text_transformed_colour((room_width/2-250), 400, "SPACE ROCKS", 3, 3, 0, c, c, c, c, 1);
-        draw_text(room_width/2-250, 500, "Score 1000 Points to Win!
+        draw_text_transformed_colour(room_width/2-250, 500, "Score 1000 Points to Win!
         
 W: Forward thrust
 S: Reverse thrust
 A/D: Rotate Ship
         
-&gt;&gt; Press Enter to Begin &lt;&lt;");
+&gt;&gt; Press Enter to Begin &lt;&lt;", 1, 1, 0, c_white, c_white, c_white, c_white, 1);
         //draw_text_
         break;
         
@@ -116,15 +185,15 @@ A/D: Rotate Ship
     case rm_win:
         var c = c_lime
         draw_text_transformed_colour(room_width/2-175, 400, "YOU WON", 3, 3, 0, c, c, c, c, 1);
-        draw_text(room_width/2, 500, "PRESS ENTER TO RESTART");
+        draw_text_transformed_colour(room_width/2-175, 500, "PRESS ENTER TO RESTART", 1, 1, 0, c_white, c_white, c_white, c_white, 1);
         break;
         
     case rm_gameover:
         
         var c = c_red
         draw_text_transformed_colour(room_width/2-175, 400, "YOU DIED", 3, 3, 0, c, c, c, c, 1);
-        draw_text(room_width/2, 500, "Final Score: "+string(score));
-        draw_text(room_width/2, 700, "PRESS ENTER TO RESTART");
+        draw_text_transformed_colour(room_width/2-175, 500, "Final Score: "+string(score), 1, 1, 0, c_white, c_white, c_white, c_white,1);
+        draw_text_transformed_colour(room_width/2-175, 700, "PRESS ENTER TO RESTART", 1, 1, 0, c_white, c_white,c_white,c_white,1);
         break;
     
 }
